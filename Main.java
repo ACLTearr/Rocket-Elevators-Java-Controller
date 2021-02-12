@@ -29,17 +29,17 @@ public class Main {
 
         //Method to create basement columns
         public void makeBasementColumn(int amountOfBasements, int amountOfElevatorPerColumn) {
-            int[] servedFloors = new int[amountOfBasements + 1];
+            List<Integer> servedFloors = new ArrayList<Integer>();
             int floor = -1;
             for (int i = 0; i < (amountOfBasements + 1); i++) {
                 if (i == 0) { //adding main floor to floor list
-                    servedFloors[i] = 1;
+                    servedFloors.add(1);
                 } else {
-                    servedFloors[i] = floor;
+                    servedFloors.add(floor);
                     floor--;
                 }
             }
-            Column column = new Column(columnID, "online", amountOfElevatorPerColumn, servedFloors, true);
+            var column = new Column(columnID, "online", amountOfElevatorPerColumn, servedFloors, true);
             columnsList.add(column);
             columnID++;
         }
@@ -49,14 +49,16 @@ public class Main {
             int amountOfFloorsPerColumn = (int)Math.ceil((double)amountOfFloors / amountOfColumns);
             int floor = 1;
             for (int i = 0; i < amountOfColumns; i++) {
-                int[] servedFloors = new int[amountOfFloorsPerColumn + 1];
+                List<Integer> servedFloors = new ArrayList<Integer>();
                 for (int x = 0; x < amountOfFloorsPerColumn; x++) {
                     if (i == 0) { //For first above ground column
-                        servedFloors[x] = floor;
+                        servedFloors.add(floor);
                         floor++;
                     } else { //For all columns after first above ground, to make sure main floor is included
-                        servedFloors[0] = 1;
-                        servedFloors[x + 1] = floor;
+                        if (x == 0) {
+                            servedFloors.add(1);
+                        }
+                        servedFloors.add(floor);
                         floor++;
                     }
                 }
