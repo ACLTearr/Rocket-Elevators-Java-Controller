@@ -536,6 +536,7 @@ public class Main {
                 battery.amountOfColumns--;
             }
 
+        
             battery.makeFloorRequestButtons(battery.amountOfFloors);
             battery.makeColumns(battery.amountOfColumns, battery.amountOfFloors, battery.amountOfElevatorPerColumn);
 
